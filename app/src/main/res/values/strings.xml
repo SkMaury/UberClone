@@ -3,4 +3,24 @@
     <string name="uber">U B E R</string>
     <string name="partner">PARTNER</string>
     <string name="looking_for_rider_app">LOOKING FOR RIDER APP?</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="register">REGISTER</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone</string>
+    <string name="dialog_register">REGISTER</string>
+    <string name="dialog_message">Please use email to register</string>
+    <string name="dialog_message_singIn">Please use email to Sign In</string>
+    <string name="cancel">@android:string/cancel</string>
+    <string name="enter_email">Please enter email address</string>
+    <string name="enter_name">Please enter your name</string>
+    <string name="enter_phone">Please enter your phone number</string>
+    <string name="enter_pass">Please enter your password</string>
+    <string name="invalid_pass">Invalid Password!!!</string>
+    <string name="invalid_email">Invalid Email Address!!!</string>
+    <string name="registration_success">Registration Successful!</string>
+    <string name="registration_failed">Registration Failed!</string>
+    <string name="incorrect_login">Incorrect Login credentials</string>
+
 </resources>

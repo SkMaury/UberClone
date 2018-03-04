@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int which) {
                 dialogInterface.dismiss();
 
-                /* Validation check is performed here */
+                /* Validation check is performed here
                 if (TextUtils.isEmpty(edtEmail.getText().toString())) {
                     Snackbar.make(rootLayout, getString(R.string.enter_email), Snackbar.LENGTH_SHORT)
                             .show();
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                     Snackbar.make(rootLayout, getString(R.string.invalid_email), Snackbar.LENGTH_SHORT)
                             .show();
                     return;
-                }
+                } */
 
                 /* Login mechanism */
                 auth.signInWithEmailAndPassword(edtEmail.getText().toString(), edtPassword.getText().toString())
@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
                             .show();
                     return;
                 }
-                if(!isValidEmailId(edtPassword.getText().toString())){
+                if(isValidEmailId(edtPassword.getText().toString().trim())){
                     Snackbar.make(rootLayout, getString(R.string.invalid_email), Snackbar.LENGTH_SHORT)
                             .show();
                     return;
@@ -208,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
                                 user.setEmail(edtPhone.getText().toString());
                                 user.setEmail(edtPassword.getText().toString());
 
-                                users.child(user.getEmail())
+                                users.child(auth.getCurrentUser().getUid())
                                         .setValue(user)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
@@ -254,11 +254,6 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean isValidEmailId(String email){
 
-        return Pattern.compile("^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
-                + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
-                + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
-                + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$").matcher(email).matches();
+        return email.matches("[a-zA-Z0-9._-]+@[a-z]+\\\\.+[a-z]+");
     }
 }

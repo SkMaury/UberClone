@@ -26,6 +26,7 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import dmax.dialog.SpotsDialog;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -94,14 +95,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int which) {
                 dialogInterface.dismiss();
 
-                /* Validation check is performed here
+                /* If a server signIn request is made then button is disabled */
+                btnSignIn.setEnabled(false);
+
+                 /* Validation check is performed here */
                 if (TextUtils.isEmpty(edtEmail.getText().toString())) {
                     Snackbar.make(rootLayout, getString(R.string.enter_email), Snackbar.LENGTH_SHORT)
-                            .show();
-                    return;
-                }
-                if (edtPassword.getText().toString().length() < 8 && !isValidPassword(edtPassword.getText().toString())) {
-                    Snackbar.make(rootLayout, getString(R.string.invalid_pass), Snackbar.LENGTH_SHORT)
                             .show();
                     return;
                 }
@@ -110,17 +109,21 @@ public class MainActivity extends AppCompatActivity {
                             .show();
                     return;
                 }
-                if (!isValidEmailId(edtPassword.getText().toString())) {
+                if (isValidEmailId(edtEmail.getText().toString().trim())) {
                     Snackbar.make(rootLayout, getString(R.string.invalid_email), Snackbar.LENGTH_SHORT)
                             .show();
                     return;
-                } */
+                }
+
+                final AlertDialog waitingDialog = new SpotsDialog(MainActivity.this);
+                waitingDialog.show();
 
                 /* Login mechanism */
                 auth.signInWithEmailAndPassword(edtEmail.getText().toString(), edtPassword.getText().toString())
                         .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                             @Override
                             public void onSuccess(AuthResult authResult) {
+                                waitingDialog.dismiss();
                                 startActivity(new Intent(MainActivity.this, Welcome.class));
                                 finish();
                             }
@@ -128,7 +131,11 @@ public class MainActivity extends AppCompatActivity {
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
+                                waitingDialog.dismiss();
                                 Snackbar.make(rootLayout, getString(R.string.incorrect_login), Snackbar.LENGTH_SHORT).show();
+
+                                /* On fail LogIn attempt the signIn button is set active again */
+                                btnSignIn.setEnabled(true);
                             }
                         });
             }
@@ -180,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
                             .show();
                     return;
                 }
-                if(edtPassword.getText().toString().length() < 8 && !isValidPassword(edtPassword.getText().toString())){
+                if(edtPassword.getText().toString().length() < 8 && !isValidPassword(edtPassword.getText().toString().trim())){
                     Snackbar.make(rootLayout, getString(R.string.invalid_pass), Snackbar.LENGTH_SHORT)
                             .show();
                     return;

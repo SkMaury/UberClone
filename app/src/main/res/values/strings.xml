@@ -22,5 +22,12 @@
     <string name="registration_success">Registration Successful!</string>
     <string name="registration_failed">Registration Failed!</string>
     <string name="incorrect_login">Incorrect Login credentials</string>
+    <string name="title_activity_welcome">Map</string>
+    <string name="now_online">You are now online</string>
+    <string name="now_offline">You are now offline</string>
+    <string name="something_went_wrong">Something went wrong !</string>
+    <string name="you">You</string>
+    <string name="play_service_device_not_supported">This device is not supported</string>
+    <string name="find_user">FIND USER</string>
 
 </resources>
